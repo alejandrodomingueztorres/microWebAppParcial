@@ -1,0 +1,109 @@
+services:
+
+  mysql_users:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_USERS_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_USERS_DATABASE}
+    volumes:
+      - mysql_users_data:/var/lib/mysql
+      - ./db-init/users_db.sql:/docker-entrypoint-initdb.d/users_db.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_USERS_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+    networks: [red-nube]
+
+  mysql_products:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PRODUCTS_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_PRODUCTS_DATABASE}
+    volumes:
+      - mysql_products_data:/var/lib/mysql
+      - ./db-init/products_db.sql:/docker-entrypoint-initdb.d/products_db.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_PRODUCTS_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+    networks: [red-nube]
+
+  mysql_orders:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ORDERS_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_ORDERS_DATABASE}
+    volumes:
+      - mysql_orders_data:/var/lib/mysql
+      - ./db-init/orders_db.sql:/docker-entrypoint-initdb.d/orders_db.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ORDERS_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+    networks: [red-nube]
+
+  microusers:
+    build: ./microUsers
+    environment:
+      MYSQL_HOST: mysql_users
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_USERS_ROOT_PASSWORD}
+      MYSQL_DB: ${MYSQL_USERS_DATABASE}
+      SECRET_KEY: ${SECRET_KEY}
+    ports: ["${USERS_PORT:-5002}:5002"]
+    depends_on:
+      mysql_users: { condition: service_healthy }
+    networks: [red-nube]
+
+  microproducts:
+    build: ./microProducts
+    environment:
+      MYSQL_HOST: mysql_products
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_PRODUCTS_ROOT_PASSWORD}
+      MYSQL_DB: ${MYSQL_PRODUCTS_DATABASE}
+      SECRET_KEY: ${SECRET_KEY}
+    ports: ["${PRODUCTS_PORT:-5003}:5003"]
+    depends_on:
+      mysql_products: { condition: service_healthy }
+    networks: [red-nube]
+
+  microorders:
+    build: ./microOrders
+    environment:
+      MYSQL_HOST: mysql_orders
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ORDERS_ROOT_PASSWORD}
+      MYSQL_DB: ${MYSQL_ORDERS_DATABASE}
+      SECRET_KEY: ${SECRET_KEY}
+      # Todavia una URL fija (dentro de la red de Docker se resuelve por
+      # nombre de servicio). En la Tercera Parte esto se reemplaza por Consul.
+      PRODUCTS_SERVICE_URL: http://microproducts:5003
+    ports: ["${ORDERS_PORT:-5004}:5004"]
+    depends_on:
+      mysql_orders: { condition: service_healthy }
+      microproducts: { condition: service_started }
+    networks: [red-nube]
+
+  frontend:
+    build: ./frontend
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+    ports: ["${FRONTEND_PORT:-5001}:5001"]
+    depends_on:
+      - microusers
+      - microproducts
+      - microorders
+    networks: [red-nube]
+
+networks:
+  red-nube:
+    driver: bridge
+
+volumes:
+  mysql_users_data:
+  mysql_products_data:
+  mysql_orders_data:

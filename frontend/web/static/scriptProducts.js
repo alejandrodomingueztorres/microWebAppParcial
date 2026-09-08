@@ -174,13 +174,10 @@ function orderProducts() {
   const productRows = document.querySelectorAll('#product-list tbody tr');
   productRows.forEach(row => {
     const quantityInput = row.querySelector('input[type="text"]');
-    const quantity = parseInt(quantityInput.value);
+    const quantity = parseInt(quantityInput.value, 10);
     if (quantity > 0) {
-      //const productId = row.id.split('-')[1]; // Extraer el ID del producto del atributo id de la fila
-	    //
       var productId = row.querySelector('td:nth-child(1)').textContent;
-      //const productId = row.id.textContent; // Extraer el ID del producto del atributo id de la fila
-      selectedProducts.push({ id: productId, quantity });
+      selectedProducts.push({ product_id: parseInt(productId, 10), quantity: quantity });
     }
   });
 
@@ -190,14 +187,8 @@ function orderProducts() {
     return;
   }
 
-  // Preparar los datos de la orden
-  const orderData = {
-    user: {
-      name: sessionStorage.getItem('username'),
-      email: sessionStorage.getItem('email')
-    },
-    products: selectedProducts
-  };
+  // El usuario se toma de la sesion (cookie), NO se envia en el body
+  const orderData = { products: selectedProducts };
 
   // Enviar los datos de la orden al endpoint
   fetch('http://192.168.80.3:5004/api/orders', {
@@ -206,17 +197,18 @@ function orderProducts() {
     body: JSON.stringify(orderData),
     credentials: 'include'
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.message === 'Orden creada exitosamente') {
-      console.log('Orden creada exitosamente!');
-      // Mostrar un mensaje de confirmación al usuario
-      alert('¡Orden creada exitosamente!');
-      // Actualizar la interfaz de usuario para reflejar los cambios (opcional)
+  .then(async response => {
+    const data = await response.json();
+    if (response.status === 201) {
+      alert('¡Orden creada exitosamente! Total: $' + data.order.total);
+      getProducts();
+    } else if (response.status === 401) {
+      alert('Debes iniciar sesion para poder ordenar.');
+    } else if (response.status === 409) {
+      alert('Inventario insuficiente: ' + data.message);
     } else {
       console.error('Error al crear la orden:', data.message);
-      // Mostrar un mensaje de error al usuario
-      alert('Error al crear la orden. Por favor, intenta nuevamente.');
+      alert('Error al crear la orden: ' + data.message);
     }
   })
   .catch(error => {

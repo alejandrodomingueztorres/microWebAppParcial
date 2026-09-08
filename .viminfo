@@ -12,9 +12,9 @@
 ~h
 # Command Line History (newest to oldest):
 :wq
-|2,0,1788821884,,"wq"
+|2,0,1788837174,,"wq"
 :q
-|2,0,1788821855,,"q"
+|2,0,1788823618,,"q"
 
 # Search String History (newest to oldest):
 
@@ -26,269 +26,353 @@
 
 # Registers:
 ""1	LINE	0
-	                     'order': new_order.to_dict(include_items=True)}), 201
-|3,1,1,1,1,0,1788821663,"                     'order': new_order.to_dict(include_items=True)}), 201"
+	}
+|3,1,1,1,1,0,1788837065,"}"
 "2	LINE	0
-	class Order(db.Model):
-|3,0,2,1,1,0,1788821292,"class Order(db.Model):"
+	requests==2.31.0
+|3,0,2,1,1,0,1788835427,"requests==2.31.0"
 "3	LINE	0
 	
-|3,0,3,1,1,0,1788821024,""
+|3,0,3,1,1,0,1788835374,""
 "4	LINE	0
-	
-|3,0,4,1,1,0,1788820944,""
+	requests==2.31.0
+|3,0,4,1,1,0,1788835342,"requests==2.31.0"
 "5	LINE	0
-	
-|3,0,5,1,1,0,1788820785,""
+	PRODUCTS_SERVICE_URL=http://localhost:5003
+|3,0,5,1,1,0,1788823741,"PRODUCTS_SERVICE_URL=http://localhost:5003"
 "6	LINE	0
-	    SERVICE_NAME = os.environ.get('SERVICE_NAME', 'orders')
-|3,0,6,1,1,0,1788820363,"    SERVICE_NAME = os.environ.get('SERVICE_NAME', 'orders')"
+	
+|3,0,6,1,1,0,1788823513,""
 "7	LINE	0
-	class Config:
-|3,0,7,1,1,0,1788820289,"class Config:"
+	
+|3,0,7,1,1,0,1788823473,""
 "8	LINE	0
-	
-|3,0,8,1,1,0,1788820065,""
+	EXPOSE 5003
+|3,0,8,1,1,0,1788823423,"EXPOSE 5003"
 "9	LINE	0
-	CMD ["python", "run.py"]
-	
-|3,0,9,1,2,0,1788805988,"CMD [\"python\", \"run.py\"]",""
+	                     'order': new_order.to_dict(include_items=True)}), 201
+|3,0,9,1,1,0,1788821663,"                     'order': new_order.to_dict(include_items=True)}), 201"
 "-	CHAR	0
 	3
 |3,0,36,0,1,0,1788806168,"3"
 
 # File marks:
-'0  5  15  ~/microOrders/requirements.txt
-|4,48,5,15,1788821884,"~/microOrders/requirements.txt"
-'1  1  0  ~/microOrders/run.py
-|4,49,1,0,1788821855,"~/microOrders/run.py"
-'2  15  12  ~/microOrders/orders/views.py
-|4,50,15,12,1788821829,"~/microOrders/orders/views.py"
-'3  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,51,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
-'4  33  36  ~/microOrders/products_client.py
-|4,52,33,36,1788821452,"~/microOrders/products_client.py"
-'5  3  16  ~/microOrders/db/db.py
-|4,53,3,16,1788821393,"~/microOrders/db/db.py"
-'6  53  86  ~/microOrders/orders/models/order_model.py
-|4,54,53,86,1788821353,"~/microOrders/orders/models/order_model.py"
-'7  4  37  ~/microProducts/run.py
-|4,55,4,37,1788821043,"~/microProducts/run.py"
-'8  15  12  ~/microProducts/products/views.py
-|4,56,15,12,1788820975,"~/microProducts/products/views.py"
-'9  80  41  ~/microProducts/products/controllers/product_controller.py
-|4,57,80,41,1788820877,"~/microProducts/products/controllers/product_controller.py"
+'0  218  0  ~/frontend/web/static/scriptProducts.js
+|4,48,218,0,1788837174,"~/frontend/web/static/scriptProducts.js"
+'1  6  15  ~/microOrders/requirements.txt
+|4,49,6,15,1788835432,"~/microOrders/requirements.txt"
+'2  5  19  ~/microProducts/requirements.txt
+|4,50,5,19,1788835412,"~/microProducts/requirements.txt"
+'3  6  15  ~/microUsers/requirements.txt
+|4,51,6,15,1788835357,"~/microUsers/requirements.txt"
+'4  109  19  ~/docker-compose.yml
+|4,52,109,19,1788823854,"~/docker-compose.yml"
+'5  15  0  ~/.env
+|4,53,15,0,1788823795,"~/.env"
+'6  1  115  ~/.env
+|4,54,1,115,1788823618,"~/.env"
+'7  5  41  ~/.env
+|4,55,5,41,1788823618,"~/.env"
+'8  11  10  ~/frontend/Dockerfile
+|4,56,11,10,1788823520,"~/frontend/Dockerfile"
+'9  11  10  ~/microUsers/Dockerfile
+|4,57,11,10,1788823491,"~/microUsers/Dockerfile"
 
 # Jumplist (newest first):
+-'  218  0  ~/frontend/web/static/scriptProducts.js
+|4,39,218,0,1788837174,"~/frontend/web/static/scriptProducts.js"
+-'  1  0  ~/frontend/web/static/scriptProducts.js
+|4,39,1,0,1788837005,"~/frontend/web/static/scriptProducts.js"
+-'  6  15  ~/microOrders/requirements.txt
+|4,39,6,15,1788835432,"~/microOrders/requirements.txt"
+-'  6  15  ~/microOrders/requirements.txt
+|4,39,6,15,1788835432,"~/microOrders/requirements.txt"
 -'  5  15  ~/microOrders/requirements.txt
-|4,39,5,15,1788821884,"~/microOrders/requirements.txt"
--'  1  0  ~/microOrders/requirements.txt
-|4,39,1,0,1788821877,"~/microOrders/requirements.txt"
--'  1  0  ~/microOrders/run.py
-|4,39,1,0,1788821855,"~/microOrders/run.py"
--'  1  0  ~/microOrders/run.py
-|4,39,1,0,1788821855,"~/microOrders/run.py"
--'  15  12  ~/microOrders/orders/views.py
-|4,39,15,12,1788821829,"~/microOrders/orders/views.py"
--'  15  12  ~/microOrders/orders/views.py
-|4,39,15,12,1788821829,"~/microOrders/orders/views.py"
--'  15  12  ~/microOrders/orders/views.py
-|4,39,15,12,1788821829,"~/microOrders/orders/views.py"
--'  15  12  ~/microOrders/orders/views.py
-|4,39,15,12,1788821829,"~/microOrders/orders/views.py"
--'  1  0  ~/microOrders/orders/views.py
-|4,39,1,0,1788821815,"~/microOrders/orders/views.py"
--'  1  0  ~/microOrders/orders/views.py
-|4,39,1,0,1788821815,"~/microOrders/orders/views.py"
--'  1  0  ~/microOrders/orders/views.py
-|4,39,1,0,1788821815,"~/microOrders/orders/views.py"
--'  1  0  ~/microOrders/orders/views.py
-|4,39,1,0,1788821815,"~/microOrders/orders/views.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  4  84  ~/microOrders/orders/controllers/order_controller.py
-|4,39,4,84,1788821787,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  1  407  ~/microOrders/orders/controllers/order_controller.py
-|4,39,1,407,1788821524,"~/microOrders/orders/controllers/order_controller.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  33  36  ~/microOrders/products_client.py
-|4,39,33,36,1788821452,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  1  0  ~/microOrders/products_client.py
-|4,39,1,0,1788821433,"~/microOrders/products_client.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  3  16  ~/microOrders/db/db.py
-|4,39,3,16,1788821393,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
--'  1  0  ~/microOrders/db/db.py
-|4,39,1,0,1788821385,"~/microOrders/db/db.py"
+|4,39,5,15,1788835424,"~/microOrders/requirements.txt"
+-'  5  15  ~/microOrders/requirements.txt
+|4,39,5,15,1788835424,"~/microOrders/requirements.txt"
+-'  5  19  ~/microProducts/requirements.txt
+|4,39,5,19,1788835412,"~/microProducts/requirements.txt"
+-'  5  19  ~/microProducts/requirements.txt
+|4,39,5,19,1788835412,"~/microProducts/requirements.txt"
+-'  5  19  ~/microProducts/requirements.txt
+|4,39,5,19,1788835412,"~/microProducts/requirements.txt"
+-'  5  19  ~/microProducts/requirements.txt
+|4,39,5,19,1788835412,"~/microProducts/requirements.txt"
+-'  7  0  ~/microProducts/requirements.txt
+|4,39,7,0,1788835371,"~/microProducts/requirements.txt"
+-'  7  0  ~/microProducts/requirements.txt
+|4,39,7,0,1788835371,"~/microProducts/requirements.txt"
+-'  7  0  ~/microProducts/requirements.txt
+|4,39,7,0,1788835371,"~/microProducts/requirements.txt"
+-'  7  0  ~/microProducts/requirements.txt
+|4,39,7,0,1788835371,"~/microProducts/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  6  15  ~/microUsers/requirements.txt
+|4,39,6,15,1788835357,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  1  0  ~/microUsers/requirements.txt
+|4,39,1,0,1788835333,"~/microUsers/requirements.txt"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  109  19  ~/docker-compose.yml
+|4,39,109,19,1788823854,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  1  0  ~/docker-compose.yml
+|4,39,1,0,1788823829,"~/docker-compose.yml"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  15  0  ~/.env
+|4,39,15,0,1788823795,"~/.env"
+-'  1  115  ~/.env
+|4,39,1,115,1788823705,"~/.env"
+-'  1  115  ~/.env
+|4,39,1,115,1788823705,"~/.env"
+-'  1  115  ~/.env
+|4,39,1,115,1788823705,"~/.env"
+-'  1  115  ~/.env
+|4,39,1,115,1788823705,"~/.env"
+-'  1  115  ~/.env
+|4,39,1,115,1788823705,"~/.env"
+-'  1  115  ~/.env
+|4,39,1,115,1788823705,"~/.env"
 
 # History of marks within files (newest to oldest):
 
+> ~/frontend/web/static/scriptProducts.js
+	*	1788837172	0
+	"	218	0
+	^	218	1
+	.	218	0
+	+	171	1269
+	+	218	0
+
 > ~/microOrders/requirements.txt
-	*	1788821882	0
-	"	5	15
-	^	5	16
-	.	5	15
-	+	5	15
+	*	1788835430	0
+	"	6	15
+	^	6	16
+	.	6	15
+	+	5	20
+	+	6	15
+
+> ~/microProducts/requirements.txt
+	*	1788835410	0
+	"	5	19
+	^	5	20
+	.	5	19
+	+	6	16
+	+	7	0
+	+	5	19
+
+> ~/microUsers/requirements.txt
+	*	1788835355	0
+	"	6	15
+	^	6	16
+	.	6	15
+	+	6	15
+
+> ~/docker-compose.yml
+	*	1788823851	0
+	"	109	19
+	^	109	20
+	.	109	19
+	+	109	19
+
+> ~/.env
+	*	1788823793	0
+	"	15	0
+	^	15	0
+	.	16	0
+	+	1	74
+	+	19	15
+	+	1	0
+	+	5	0
+	+	9	0
+	+	13	0
+	+	16	0
+
+> ~/frontend/Dockerfile
+	*	1788823519	0
+	"	11	10
+	^	11	11
+	.	11	10
+	+	13	23
+	+	12	0
+	+	11	10
+
+> ~/microUsers/Dockerfile
+	*	1788823489	0
+	"	11	10
+	^	11	11
+	.	11	10
+	+	8	23
+	+	7	10
+	+	13	23
+	+	12	0
+	+	11	10
+
+> ~/microOrders/Dockerfile
+	*	1788823447	0
+	"	11	11
+	^	11	12
+	.	11	11
+	+	8	23
+	+	7	10
+	+	13	23
+	+	11	11
+
+> ~/microProducts/Dockerfile
+	*	1788823379	0
+	"	13	23
+	^	13	24
+	.	13	23
+	+	9	24
+	+	9	0
+	+	8	23
+	+	13	23
 
 > ~/microOrders/run.py
 	*	1788821844	0
@@ -371,13 +455,6 @@
 	.	3	17
 	+	3	17
 
-> ~/.env
-	*	1788820509	0
-	"	5	41
-	^	5	42
-	.	5	41
-	+	5	41
-
 > ~/microOrders/config.py
 	*	1788820438	0
 	"	12	57
@@ -411,31 +488,6 @@
 	+	13	0
 	+	12	57
 
-> ~/microOrders/Dockerfile
-	*	1788806173	0
-	"	7	10
-	^	7	11
-	.	7	10
-	+	8	23
-	+	7	10
-
-> ~/microUsers/Dockerfile
-	*	1788806133	0
-	"	7	10
-	^	7	11
-	.	7	10
-	+	8	23
-	+	7	10
-
-> ~/microProducts/Dockerfile
-	*	1788806026	0
-	"	8	23
-	^	8	24
-	.	8	23
-	+	9	24
-	+	9	0
-	+	8	23
-
 > ~/microProducts/consul_Client.py
 	*	1788738647	0
 	"	7	84
@@ -445,13 +497,6 @@
 	+	8	128
 	+	8	2
 	+	8	0
-
-> ~/microProducts/requirements.txt
-	*	1788737405	0
-	"	6	0
-	^	6	0
-	.	5	16
-	+	5	16
 
 > ~/microProducts/products/models/product_model.py
 	*	1788736468	0

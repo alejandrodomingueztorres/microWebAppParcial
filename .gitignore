@@ -4,3 +4,8 @@ __pycache__/
 .env
 c.txt
 cookies.txt
+.env
+logs/
+start_all.sh
+stop_all.sh
+venv/
