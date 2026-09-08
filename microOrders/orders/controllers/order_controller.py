@@ -1,9 +1,14 @@
-from flask import Blueprint, request, jsonify, session
+from flask import Blueprint, request, jsonify, session, current_app
 from orders.models.order_model import Order, OrderItem
 from db.db import db
 from products_client import get_product, adjust_inventory, ProductsServiceUnavailable
 
 order_controller = Blueprint('order_controller', __name__)
+
+
+def _consul_settings():
+    cfg = current_app.config
+    return cfg['CONSUL_HOST'], cfg['CONSUL_PORT'], cfg['PRODUCTS_SERVICE_NAME']
 
 
 @order_controller.route('/api/orders', methods=['GET'])
@@ -26,7 +31,6 @@ def get_order(order_id):
 
 @order_controller.route('/api/orders', methods=['POST'])
 def create_order():
-    # a) sesion valida
     user_name = session.get('username')
     user_email = session.get('email')
     if not user_name or not user_email:
@@ -41,12 +45,13 @@ def create_order():
            or not isinstance(line['quantity'], (int, float)) or line['quantity'] <= 0:
             return jsonify({'message': 'Informacion de productos invalida'}), 400
 
-    # b) consultar precio/existencias + c) verificar disponibilidad de TODAS las lineas
+    consul_host, consul_port, products_service_name = _consul_settings()
+
     order_lines = []
     try:
         for line in products:
             product_id, quantity = int(line['product_id']), int(line['quantity'])
-            product = get_product(product_id)
+            product = get_product(product_id, consul_host, consul_port, products_service_name)
             if product is None:
                 return jsonify({'message': f'El producto {product_id} no existe'}), 404
             if product['quantity'] < quantity:
@@ -57,16 +62,16 @@ def create_order():
     except ProductsServiceUnavailable as e:
         return jsonify({'message': f'Servicio de productos no disponible: {e}'}), 500
 
-    # d) calcular el total
     total = sum(l['quantity'] * l['unit_price'] for l in order_lines)
 
-    # e) actualizar inventario, con rollback si algo falla a mitad de camino
     applied = []
     try:
         for l in order_lines:
-            ok, status_code, body = adjust_inventory(l['product_id'], l['quantity'])
+            ok, status_code, body = adjust_inventory(
+                l['product_id'], l['quantity'], consul_host, consul_port, products_service_name
+            )
             if not ok:
-                _rollback_inventory(applied)
+                _rollback_inventory(applied, consul_host, consul_port, products_service_name)
                 if status_code == 409:
                     return jsonify({'message': f"Inventario insuficiente para el producto {l['product_id']}", **body}), 409
                 if status_code == 404:
@@ -74,10 +79,9 @@ def create_order():
                 return jsonify({'message': 'Error actualizando inventario'}), 500
             applied.append(l)
     except ProductsServiceUnavailable as e:
-        _rollback_inventory(applied)
+        _rollback_inventory(applied, consul_host, consul_port, products_service_name)
         return jsonify({'message': f'Servicio de productos no disponible: {e}'}), 500
 
-    # f) crear la orden + items y persistir
     try:
         new_order = Order(user_name=user_name, user_email=user_email, total=total)
         db.session.add(new_order)
@@ -89,16 +93,16 @@ def create_order():
         db.session.commit()
     except Exception:
         db.session.rollback()
-        _rollback_inventory(order_lines)
+        _rollback_inventory(order_lines, consul_host, consul_port, products_service_name)
         return jsonify({'message': 'Error interno creando la orden'}), 500
 
     return jsonify({'message': 'Orden creada exitosamente',
                      'order': new_order.to_dict(include_items=True)}), 201
 
 
-def _rollback_inventory(lines):
+def _rollback_inventory(lines, consul_host, consul_port, products_service_name):
     for l in lines:
         try:
-            adjust_inventory(l['product_id'], -l['quantity'])
+            adjust_inventory(l['product_id'], -l['quantity'], consul_host, consul_port, products_service_name)
         except ProductsServiceUnavailable:
             print(f"[microOrders] ALERTA: no se pudo revertir inventario del producto {l['product_id']}")

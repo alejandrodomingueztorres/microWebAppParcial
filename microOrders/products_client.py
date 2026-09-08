@@ -1,13 +1,21 @@
 import requests
-from flask import current_app
+from consul_client import discover_service
 
 
 class ProductsServiceUnavailable(Exception):
     pass
 
 
-def get_product(product_id):
-    base_url = current_app.config['PRODUCTS_SERVICE_URL']
+def _resolve_products_base_url(consul_host, consul_port, service_name):
+    instance = discover_service(service_name, consul_host, consul_port)
+    if instance is None:
+        raise ProductsServiceUnavailable(f"No hay instancias saludables de '{service_name}' en Consul")
+    address, port = instance
+    return f"http://{address}:{port}"
+
+
+def get_product(product_id, consul_host, consul_port, service_name):
+    base_url = _resolve_products_base_url(consul_host, consul_port, service_name)
     try:
         resp = requests.get(f"{base_url}/api/products/{product_id}", timeout=5)
     except requests.exceptions.RequestException as e:
@@ -18,8 +26,8 @@ def get_product(product_id):
     return resp.json()
 
 
-def adjust_inventory(product_id, delta):
-    base_url = current_app.config['PRODUCTS_SERVICE_URL']
+def adjust_inventory(product_id, delta, consul_host, consul_port, service_name):
+    base_url = _resolve_products_base_url(consul_host, consul_port, service_name)
     try:
         resp = requests.put(f"{base_url}/api/products/{product_id}/inventory",
                              json={'quantity': delta}, timeout=5)

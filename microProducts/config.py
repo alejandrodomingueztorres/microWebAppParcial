@@ -11,3 +11,10 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.environ.get('SECRET_KEY', 'secret123')
 
+
+# ---- Consul ----
+    CONSUL_HOST = os.environ.get('CONSUL_HOST', 'consul')
+    CONSUL_PORT = int(os.environ.get('CONSUL_PORT', 8500))
+    SERVICE_NAME = os.environ.get('SERVICE_NAME', 'products')
+    SERVICE_HOST = os.environ.get('SERVICE_HOST', 'microproducts')
+    SERVICE_PORT = int(os.environ.get('SERVICE_PORT', 5003))

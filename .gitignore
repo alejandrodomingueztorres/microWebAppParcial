@@ -9,3 +9,7 @@ logs/
 start_all.sh
 stop_all.sh
 venv/
+.bash_history
+.mysql_history
+.viminfo
+.docker/

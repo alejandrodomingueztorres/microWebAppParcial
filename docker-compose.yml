@@ -1,5 +1,20 @@
 services:
 
+  consul:
+    image: hashicorp/consul:1.19
+    command: agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+    ports:
+      - "${CONSUL_UI_PORT:-8500}:8500"
+    volumes:
+      - consul_data:/consul/data
+    healthcheck:
+      test: ["CMD", "consul", "members"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks: [red-nube]
+
+
   mysql_users:
     image: mysql:8.0
     environment:
@@ -107,3 +122,6 @@ volumes:
   mysql_users_data:
   mysql_products_data:
   mysql_orders_data:
+  consul_data: 
+
+    
