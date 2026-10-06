@@ -113,11 +113,11 @@ resource "azurerm_linux_virtual_machine" "vm" {
   admin_username                  = var.admin_username
   network_interface_ids           = [azurerm_network_interface.nic[each.key].id]
   disable_password_authentication = true
-
   admin_ssh_key {
     username   = var.admin_username
     public_key = file(var.public_key_path)
   }
+
 
   os_disk {
     caching              = "ReadWrite"
@@ -130,8 +130,7 @@ resource "azurerm_linux_virtual_machine" "vm" {
     sku       = "22_04-lts-gen2"
     version   = "latest"
   }
-}
-
+ }
 # --- Terraform escribe el inventario de Ansible ---
 resource "local_file" "inventory" {
   filename = "${path.module}/../ansible/inventory.ini"

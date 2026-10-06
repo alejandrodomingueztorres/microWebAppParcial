@@ -10,7 +10,14 @@ databases:
   - { name: mysql_products, db: products_db, sql: products_db.sql, password: "{{ products_db_password }}" }
   - { name: mysql_orders,   db: orders_db,   sql: orders_db.sql,   password: "{{ orders_db_password }}" }
 
+haproxy_private_ip: "10.0.1.10"
+haproxy_stats_user: "admin"
+haproxy_stats_password: "mp2stats123"
+
 services:
-  - { name: users-service,    image: users-service,    port: 3001, db_host: mysql_users,    db: users_db,    password: "{{ users_db_password }}" }
-  - { name: products-service, image: products-service, port: 3002, db_host: mysql_products, db: products_db, password: "{{ products_db_password }}" }
-  - { name: orders-service,   image: orders-service,   port: 3003, db_host: mysql_orders,   db: orders_db,   password: "{{ orders_db_password }}", extra_env: { PRODUCTS_SERVICE_URL: "http://products-service:3002" } }
+  - { name: users-service,      image: users-service,    port: 3001, host_port: 3001, db_host: mysql_users,    db: users_db,    password: "{{ users_db_password }}" }
+  - { name: users-service-2,    image: users-service,    port: 3001, host_port: 3011, db_host: mysql_users,    db: users_db,    password: "{{ users_db_password }}" }
+  - { name: products-service,   image: products-service, port: 3002, host_port: 3002, db_host: mysql_products, db: products_db, password: "{{ products_db_password }}" }
+  - { name: products-service-2, image: products-service, port: 3002, host_port: 3012, db_host: mysql_products, db: products_db, password: "{{ products_db_password }}" }
+  - { name: orders-service,     image: orders-service,   port: 3003, host_port: 3003, db_host: mysql_orders,   db: orders_db,   password: "{{ orders_db_password }}", extra_env: { PRODUCTS_SERVICE_URL: "http://{{ haproxy_private_ip }}" } }
+  - { name: orders-service-2,   image: orders-service,   port: 3003, host_port: 3013, db_host: mysql_orders,   db: orders_db,   password: "{{ orders_db_password }}", extra_env: { PRODUCTS_SERVICE_URL: "http://{{ haproxy_private_ip }}" } }

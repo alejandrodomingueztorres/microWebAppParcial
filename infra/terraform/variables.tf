@@ -19,5 +19,5 @@ variable "admin_username" {
 }
 variable "public_key_path" {
   type    = string
-  default = "~/.ssh/microapp.pub"
+  default = "/home/vagrant/.ssh/microapp.pub"
 }

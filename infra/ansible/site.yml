@@ -65,7 +65,7 @@
         networks:
           - name: red-nube
         published_ports:
-          - "{{ item.port }}:{{ item.port }}"
+          - "{{ item.host_port }}:{{ item.port }}"
         env: "{{ {'MYSQL_HOST': item.db_host, 'MYSQL_USER': 'root', 'MYSQL_PASSWORD': item.password, 'MYSQL_DB': item.db, 'SECRET_KEY': secret_key, 'CONSUL_ENABLED': 'false'} | combine(item.extra_env | default({})) }}"
       loop: "{{ services }}"
       no_log: true
@@ -85,3 +85,16 @@
         name: haproxy
         enabled: true
         state: started
+
+    - name: Instalar la configuración de HAProxy
+      ansible.builtin.template:
+        src: haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+        validate: haproxy -c -f %s
+      notify: Reiniciar HAProxy
+
+  handlers:
+    - name: Reiniciar HAProxy
+      ansible.builtin.systemd:
+        name: haproxy
+        state: restarted
