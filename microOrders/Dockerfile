@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 ENV PYTHONUNBUFFERED=1
-EXPOSE 5004 
+EXPOSE 3003 
 
 CMD ["python", "run.py"]

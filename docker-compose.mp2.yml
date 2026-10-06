@@ -1,0 +1,11 @@
+services:
+  microusers:
+    environment:
+      CONSUL_ENABLED: "false"
+  microproducts:
+    environment:
+      CONSUL_ENABLED: "false"
+  microorders:
+    environment:
+      CONSUL_ENABLED: "false"
+      PRODUCTS_SERVICE_URL: http://microproducts:3002

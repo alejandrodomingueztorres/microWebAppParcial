@@ -1,3 +1,4 @@
+import os
 import requests
 from consul_client import discover_service
 
@@ -7,6 +8,9 @@ class ProductsServiceUnavailable(Exception):
 
 
 def _resolve_products_base_url(consul_host, consul_port, service_name):
+    fixed_url = os.environ.get('PRODUCTS_SERVICE_URL')
+    if fixed_url:
+        return fixed_url.rstrip('/')
     instance = discover_service(service_name, consul_host, consul_port)
     if instance is None:
         raise ProductsServiceUnavailable(f"No hay instancias saludables de '{service_name}' en Consul")

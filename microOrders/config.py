@@ -16,7 +16,7 @@ class Config:
     CONSUL_PORT = int(os.environ.get('CONSUL_PORT', 8500))
     SERVICE_NAME = os.environ.get('SERVICE_NAME', 'orders')
     SERVICE_HOST = os.environ.get('SERVICE_HOST', 'microorders')
-    SERVICE_PORT = int(os.environ.get('SERVICE_PORT', 5004))
+    SERVICE_PORT = int(os.environ.get('SERVICE_PORT', 3003))
 
     # Nombre LOGICO con el que se busca a microProducts en Consul.
     # NUNCA una URL: se resuelve dinamicamente en tiempo de ejecucion.

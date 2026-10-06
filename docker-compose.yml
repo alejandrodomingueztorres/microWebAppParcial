@@ -24,7 +24,7 @@ services:
       - mysql_users_data:/var/lib/mysql
       - ./db-init/users_db.sql:/docker-entrypoint-initdb.d/users_db.sql:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_USERS_ROOT_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_USERS_ROOT_PASSWORD}"]
       interval: 5s
       timeout: 5s
       retries: 15
@@ -39,7 +39,7 @@ services:
       - mysql_products_data:/var/lib/mysql
       - ./db-init/products_db.sql:/docker-entrypoint-initdb.d/products_db.sql:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_PRODUCTS_ROOT_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_PRODUCTS_ROOT_PASSWORD}"]
       interval: 5s
       timeout: 5s
       retries: 15
@@ -54,7 +54,7 @@ services:
       - mysql_orders_data:/var/lib/mysql
       - ./db-init/orders_db.sql:/docker-entrypoint-initdb.d/orders_db.sql:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-p${MYSQL_ORDERS_ROOT_PASSWORD}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ORDERS_ROOT_PASSWORD}"]
       interval: 5s
       timeout: 5s
       retries: 15
@@ -68,7 +68,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_USERS_ROOT_PASSWORD}
       MYSQL_DB: ${MYSQL_USERS_DATABASE}
       SECRET_KEY: ${SECRET_KEY}
-    ports: ["${USERS_PORT:-5002}:5002"]
+    ports: ["${USERS_PORT:-3001}:3001"]
     depends_on:
       mysql_users: { condition: service_healthy }
     networks: [red-nube]
@@ -81,7 +81,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PRODUCTS_ROOT_PASSWORD}
       MYSQL_DB: ${MYSQL_PRODUCTS_DATABASE}
       SECRET_KEY: ${SECRET_KEY}
-    ports: ["${PRODUCTS_PORT:-5003}:5003"]
+    ports: ["${PRODUCTS_PORT:-3002}:3002"]
     depends_on:
       mysql_products: { condition: service_healthy }
     networks: [red-nube]
@@ -96,8 +96,8 @@ services:
       SECRET_KEY: ${SECRET_KEY}
       # Todavia una URL fija (dentro de la red de Docker se resuelve por
       # nombre de servicio). En la Tercera Parte esto se reemplaza por Consul.
-      PRODUCTS_SERVICE_URL: http://microproducts:5003
-    ports: ["${ORDERS_PORT:-5004}:5004"]
+      PRODUCTS_SERVICE_URL: http://microproducts:3002
+    ports: ["${ORDERS_PORT:-3003}:3003"]
     depends_on:
       mysql_orders: { condition: service_healthy }
       microproducts: { condition: service_started }

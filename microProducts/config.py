@@ -17,4 +17,4 @@ class Config:
     CONSUL_PORT = int(os.environ.get('CONSUL_PORT', 8500))
     SERVICE_NAME = os.environ.get('SERVICE_NAME', 'products')
     SERVICE_HOST = os.environ.get('SERVICE_HOST', 'microproducts')
-    SERVICE_PORT = int(os.environ.get('SERVICE_PORT', 5003))
+    SERVICE_PORT = int(os.environ.get('SERVICE_PORT', 3002))
