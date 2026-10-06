@@ -1,0 +1,16 @@
+dockerhub_user: adominguez1
+secret_key: "mp2_123"
+
+users_db_password: "users123"
+products_db_password: "products123"
+orders_db_password: "orders123"
+
+databases:
+  - { name: mysql_users,    db: users_db,    sql: users_db.sql,    password: "{{ users_db_password }}" }
+  - { name: mysql_products, db: products_db, sql: products_db.sql, password: "{{ products_db_password }}" }
+  - { name: mysql_orders,   db: orders_db,   sql: orders_db.sql,   password: "{{ orders_db_password }}" }
+
+services:
+  - { name: users-service,    image: users-service,    port: 3001, db_host: mysql_users,    db: users_db,    password: "{{ users_db_password }}" }
+  - { name: products-service, image: products-service, port: 3002, db_host: mysql_products, db: products_db, password: "{{ products_db_password }}" }
+  - { name: orders-service,   image: orders-service,   port: 3003, db_host: mysql_orders,   db: orders_db,   password: "{{ orders_db_password }}", extra_env: { PRODUCTS_SERVICE_URL: "http://products-service:3002" } }

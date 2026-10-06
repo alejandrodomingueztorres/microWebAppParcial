@@ -1,0 +1,87 @@
+- name: Configurar vm-microservices
+  hosts: microservices
+  become: true
+  tasks:
+    - name: Instalar Docker y el SDK de Python para Ansible
+      ansible.builtin.apt:
+        name: [docker.io, python3-docker]
+        state: present
+        update_cache: true
+
+    - name: Habilitar e iniciar Docker al arranque
+      ansible.builtin.systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Crear la red de contenedores
+      community.docker.docker_network:
+        name: red-nube
+
+    - name: Crear carpeta de SQL de inicio
+      ansible.builtin.file:
+        path: /opt/mp2/db-init
+        state: directory
+
+    - name: Copiar los SQL de inicio
+      ansible.builtin.copy:
+        src: db-init/
+        dest: /opt/mp2/db-init/
+
+    - name: Levantar las bases de datos MySQL
+      community.docker.docker_container:
+        name: "{{ item.name }}"
+        image: mysql:8.0
+        state: started
+        restart_policy: always
+        networks:
+          - name: red-nube
+        env:
+          MYSQL_ROOT_PASSWORD: "{{ item.password }}"
+          MYSQL_DATABASE: "{{ item.db }}"
+        volumes:
+          - "{{ item.name }}_data:/var/lib/mysql"
+          - "/opt/mp2/db-init/{{ item.sql }}:/docker-entrypoint-initdb.d/{{ item.sql }}:ro"
+      loop: "{{ databases }}"
+      no_log: true
+
+    - name: Esperar a que cada MySQL acepte conexiones TCP
+      ansible.builtin.command: >
+        docker exec {{ item.name }} mysqladmin ping -h 127.0.0.1 -uroot -p{{ item.password }} --silent
+      register: ping
+      until: ping.rc == 0
+      retries: 30
+      delay: 5
+      changed_when: false
+      loop: "{{ databases }}"
+      no_log: true
+
+    - name: Levantar los microservicios
+      community.docker.docker_container:
+        name: "{{ item.name }}"
+        image: "{{ dockerhub_user }}/{{ item.image }}:latest"
+        state: started
+        restart_policy: always
+        networks:
+          - name: red-nube
+        published_ports:
+          - "{{ item.port }}:{{ item.port }}"
+        env: "{{ {'MYSQL_HOST': item.db_host, 'MYSQL_USER': 'root', 'MYSQL_PASSWORD': item.password, 'MYSQL_DB': item.db, 'SECRET_KEY': secret_key, 'CONSUL_ENABLED': 'false'} | combine(item.extra_env | default({})) }}"
+      loop: "{{ services }}"
+      no_log: true
+
+- name: Configurar vm-haproxy
+  hosts: haproxy
+  become: true
+  tasks:
+    - name: Instalar HAProxy
+      ansible.builtin.apt:
+        name: haproxy
+        state: present
+        update_cache: true
+
+    - name: Habilitar e iniciar HAProxy
+      ansible.builtin.systemd:
+        name: haproxy
+        enabled: true
+        state: started
