@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-users
+  namespace: microapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-users
+  template:
+    metadata:
+      labels:
+        app: mysql-users
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: users-db-password
+            - name: MYSQL_DATABASE
+              value: users_db
+          volumeMounts:
+            - name: init
+              mountPath: /docker-entrypoint-initdb.d
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              memory: "768Mi"
+      volumes:
+        - name: init
+          configMap:
+            name: users-db-init
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-users
+  namespace: microapp
+spec:
+  selector:
+    app: mysql-users
+  ports:
+    - port: 3306
+      targetPort: 3306

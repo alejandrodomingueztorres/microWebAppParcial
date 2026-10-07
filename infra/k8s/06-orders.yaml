@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-service
+  namespace: microapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: orders
+  template:
+    metadata:
+      labels:
+        app: orders
+    spec:
+      restartPolicy: Always
+      initContainers:
+        - name: esperar-mysql
+          image: busybox:1.36
+          command: ["sh", "-c", "until nc -z mysql-orders 3306; do echo esperando mysql; sleep 3; done"]
+      containers:
+        - name: orders
+          image: adominguez1/orders-service:latest
+          ports:
+            - containerPort: 3003
+          env:
+            - name: MYSQL_HOST
+              value: mysql-orders
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_DB
+              value: orders_db
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: orders-db-password
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: secret-key
+            - name: CONSUL_ENABLED
+              value: "false"
+            - name: PRODUCTS_SERVICE_URL
+              value: "http://products-svc:3002"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3003
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              memory: "256Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orders-svc
+  namespace: microapp
+spec:
+  type: ClusterIP
+  selector:
+    app: orders
+  ports:
+    - port: 3003
+      targetPort: 3003

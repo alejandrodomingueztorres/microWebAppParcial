@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-products
+  namespace: microapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-products
+  template:
+    metadata:
+      labels:
+        app: mysql-products
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: products-db-password
+            - name: MYSQL_DATABASE
+              value: products_db
+          volumeMounts:
+            - name: init
+              mountPath: /docker-entrypoint-initdb.d
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              memory: "768Mi"
+      volumes:
+        - name: init
+          configMap:
+            name: products-db-init
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-products
+  namespace: microapp
+spec:
+  selector:
+    app: mysql-products
+  ports:
+    - port: 3306
+      targetPort: 3306
